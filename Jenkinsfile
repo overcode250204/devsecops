@@ -18,7 +18,7 @@ pipeline {
         stage('Prepare Reports Directory') {
             steps {
                 sh '''
-                   if  not exist %REPORT_DIR% mkdir %REPORT_DIR%
+                   mkdir -p "$REPORT_DIR"
                 '''
             }
         }
