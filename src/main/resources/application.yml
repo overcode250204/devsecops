@@ -1,0 +1,47 @@
+server:
+  port: 8080
+  error:
+    include-stacktrace: never
+    include-message: never
+
+spring:
+  application:
+    name: springboot-devsecops-phase1-lab
+  datasource:
+    url: jdbc:h2:mem:devsecops_lab
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  h2:
+    console:
+
+      enabled: true
+      path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      show-details: never
+
+app:
+  lab:
+    vulnerable-mode: false
+    allowed-fetch-hosts:
+      - example.com
+      - www.example.com
+security:
+  jwt:
+    issuer: "http://localhost:8080"
+    secret: "this-is-a-demo-secret-key-for-hs256-devsecops-lab-please-change"
+    access-token-minutes: 30
