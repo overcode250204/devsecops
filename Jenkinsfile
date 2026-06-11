@@ -5,9 +5,9 @@ pipeline {
         jdk 'JDK-21'
     }
     environment {
-        APP_NAME = 'springboot-devsecops-phase1-lab',
-        IMAGE_NAME = 'springboot-devsecops-lab',
-        REPORT_DIR = 'security-reports',
+        APP_NAME = 'springboot-devsecops-phase1-lab'
+        IMAGE_NAME = 'springboot-devsecops-lab'
+        REPORT_DIR = 'security-reports'
     }
     stages {
         stage('Checkout') {
