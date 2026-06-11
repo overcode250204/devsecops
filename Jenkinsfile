@@ -17,21 +17,21 @@ pipeline {
         }
         stage('Prepare Reports Directory') {
             steps {
-                bat '''
+                sh '''
                    if  not exist %REPORT_DIR% mkdir %REPORT_DIR%
                 '''
             }
         }
         stage('Maven Test') {
             steps {
-                bat '''
+                sh '''
                     mvn clean test
                 '''
             }
         }
         stage('Maven Package') {
             steps {
-                bat '''
+                sh '''
                     mvn package -DskipTests
                 '''
             }
