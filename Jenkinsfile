@@ -22,6 +22,20 @@ pipeline {
                 '''
             }
         }
+        stage('') {
+            steps {
+                sh '''
+                    mkdir -p "$REPORT_DIR"
+                    docker run --rm \
+                      -v "$PWD:/repo" \
+                      zricethezav/gitleaks:latest \
+                      detect --source="/repo" \
+                      --report-format=json \
+                      --report-path="/repo/$REPORT_DIR/gitleaks-report.json" \
+                      --no-git
+                 '''
+            }
+        }
         stage('Maven Test') {
             steps {
                 sh '''
@@ -40,6 +54,7 @@ pipeline {
     post {
         always {
             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true, allowEmptyArchive: true
+            archiveArtifacts artifacts: 'security-reports/**/*', allowEmptyArchive: true
         }
 
         success {
